@@ -6,10 +6,11 @@ const Quiz = () =>{
 
     const [current, setCurrent] = useState(0)
     const [selectChoice, setSelectChoice] = useState('')
-    const {score, setScore} = useContext(DataContext)
+    const {score, setScore, setAppState} = useContext(DataContext)
 
     useEffect(()=>{
         checkAnswer()
+        // eslint-disable-next-line
     },[selectChoice])
 
     const checkAnswer=()=>{
@@ -17,9 +18,20 @@ const Quiz = () =>{
             if(selectChoice === QuestionsData[current].answer){
                 console.log("ตอบถูกและได้คะแนน");
                 setScore(score+1)
+                nextQuestion()
             } else {
                 console.log("ตอบผิด");
+                nextQuestion()
             }
+        }
+    }
+
+    const nextQuestion=()=>{
+        setSelectChoice("")
+        if(current === QuestionsData.length-1){
+            setAppState('score')
+        } else {
+            setCurrent(current+1)
         }
     }
 
