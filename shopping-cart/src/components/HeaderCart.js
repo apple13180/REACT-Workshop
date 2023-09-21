@@ -1,8 +1,11 @@
+import { MyCartContext } from "../management/context"
+
 const HeaderCart =()=>{
+    const {amount} = MyCartContext()
     return (
         <button className='button'>
             <span>ตระกร้าสินค้า</span>
-            <span className='badge'>10</span>
+            <span className='badge'>{amount}</span>
         </button>
     )
 }
